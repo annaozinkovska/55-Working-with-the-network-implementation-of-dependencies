@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="body">
+        <div class="picture">
+            <img [src]="img" alt="">
+        </div>
+        <div class="user-data">
+            <div class="user-data-item">
+                <h2>{{name}}</h2>
+                <div class="edit-body">
+                    <input type="text" placeholder="Write new name">
+                    <button class="network" (click)="showPopUp()" >Edit</button>
+                </div>
+            </div>
+            <div class="user-data-item">
+                <div class="status-text">{{status}}</div>
+                <div class="edit-body">
+                    <input type="text" placeholder="Write new status">
+                    <button class="network" (click)="showPopUp()" >Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="group">
+    <p><b>Group Name:</b><span>{{usersService.group}}</span></p>
+</div>
+</div>                  
+<ng-template #popUp></ng-template> 

@@ -1,0 +1,35 @@
+.body{
+    text-align: center;
+    margin-bottom: 40px;
+}
+h1{
+    margin-bottom: 20px;
+    color: #fff;
+    span{
+        color: #13db13;
+        font-weight: 600;
+        font-style: italic;
+    }
+}
+
+.edit-body{
+    input{
+        margin-right: 10px;
+        width: 250px;
+        height: 25px;
+        font-size: 18px;
+    }
+    button{
+        background-color: #ccc;
+        border: none;
+        color: maroon;
+        font-weight: 600;
+        font-size: 18px;
+        height: 29px;
+        width: 60px;
+        cursor: pointer;
+        &:not(:last-child){
+            margin-right: 5px;
+        }
+    }
+}

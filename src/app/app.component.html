@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <header>
+        
+        <app-header></app-header>
+    </header> 
+      
+    <main>
+        <app-user 
+        *ngFor="let user of users"
+        [name]="user.name"
+        [status]="user.status"
+        [img]="user.url"
+        ></app-user>
+    </main>
+</div>
+
+
+
+<ng-template #popUp></ng-template> 
