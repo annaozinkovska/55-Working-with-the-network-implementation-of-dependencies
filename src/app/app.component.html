@@ -1,19 +1,78 @@
-<div class="wrapper">
-    <header>
-        
-        <app-header></app-header>
-    </header> 
-      
-    <main>
-        <app-user 
-        *ngFor="let user of users"
-        [name]="user.name"
-        [status]="user.status"
-        [img]="user.url"
-        ></app-user>
-    </main>
-</div>
 
 
+ <div class="wrapper">
+    <form 
+        (ngSubmit)="submit(user)" 
+        #user="ngForm"
+        name="user"
+    >
+        <div class="form-item">
+            <label for="login">Login</label>
+            <input 
+                name="login"
+                type="text"
+                placeholder="Your Login..." 
+                #login="ngModel"
+                ngModel 
+                pattern="[a-zA-Z0-9]+"
+                required
+            >
+            <ng-container *ngIf="login.invalid && login.touched">
+                <ng-container *ngIf="login.errors?.['required']">
+                    <p>Login is required</p>
+                </ng-container>
+                <ng-container *ngIf="login.errors?.['pattern']">
+                    <p>Login must contain only latin letters and numbers without spaces</p>
+                </ng-container>
+            </ng-container>
+        </div>
 
-<ng-template #popUp></ng-template> 
+        <div class="form-item">
+            <label for="email">Email</label>
+            <input 
+                id="email" 
+                placeholder="Your email..."
+                name="email"
+                #email="ngModel"
+                ngModel 
+                required 
+                email
+            >
+            <ng-container *ngIf="email.invalid && email.touched">
+                <ng-container *ngIf="email.errors?.['required']">
+                    <p>Email is required</p>
+                </ng-container>
+                <ng-container *ngIf="email.errors?.['email']">
+                    <p>Email must be a valid email address</p>
+                </ng-container>
+            </ng-container>
+        </div>
+
+        <div class="form-item">
+            <label for="password">Password</label>
+            <input 
+                id="password" 
+                placeholder="Your password..."
+                name="password" 
+                type="password"
+                #password="ngModel" 
+                ngModel 
+                required
+                minlength="7"
+            >
+            <ng-container *ngIf="password.invalid && password.touched">
+                <ng-container *ngIf="password.errors?.['required']">
+                    <p>Password is required</p>
+                </ng-container>
+                <ng-container *ngIf="password.errors?.['minlength']">
+                    <p>
+                        Password must be at least {{password.errors?.['minlength']['requiredLength']}} characters long
+                        You entered {{password.errors?.['minlength']['actualLength']}} characters
+                    </p>
+                </ng-container>
+            </ng-container>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div> 
+
