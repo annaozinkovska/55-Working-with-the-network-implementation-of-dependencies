@@ -1,78 +1,81 @@
-
-
- <div class="wrapper">
+<div class="wrapper">
     <form 
-        (ngSubmit)="submit(user)" 
-        #user="ngForm"
-        name="user"
+        [formGroup]="form" 
+        (ngSubmit)="submit()"
     >
         <div class="form-item">
             <label for="login">Login</label>
             <input 
-                name="login"
-                type="text"
+                formControlName="login" 
+                type="text" 
                 placeholder="Your Login..." 
-                #login="ngModel"
-                ngModel 
-                pattern="[a-zA-Z0-9]+"
-                required
             >
-            <ng-container *ngIf="login.invalid && login.touched">
-                <ng-container *ngIf="login.errors?.['required']">
-                    <p>Login is required</p>
+            <p 
+                *ngIf="form.get('login')?.invalid && form.get('login')?.touched"
+            >
+                <ng-container 
+                    *ngIf="form.get('login')?.errors?.['required']"
+                >Login is required
                 </ng-container>
-                <ng-container *ngIf="login.errors?.['pattern']">
-                    <p>Login must contain only latin letters and numbers without spaces</p>
+                <ng-container 
+                    *ngIf="form.get('login')?.errors?.['pattern']"
+                >Login must contain only latin letters and numbers without spaces
                 </ng-container>
-            </ng-container>
+            </p>
         </div>
 
         <div class="form-item">
             <label for="email">Email</label>
             <input 
-                id="email" 
-                placeholder="Your email..."
-                name="email"
-                #email="ngModel"
-                ngModel 
-                required 
-                email
+                formControlName="email" 
+                placeholder="Your email..." 
+                type="email" 
             >
-            <ng-container *ngIf="email.invalid && email.touched">
-                <ng-container *ngIf="email.errors?.['required']">
-                    <p>Email is required</p>
+            <p 
+                *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+            >
+                <ng-container 
+                    *ngIf="form.get('email')?.errors?.['required']"
+                >Email is required
                 </ng-container>
-                <ng-container *ngIf="email.errors?.['email']">
-                    <p>Email must be a valid email address</p>
+                <ng-container 
+                    *ngIf="form.get('email')?.errors?.['email']"
+                >Email must be a valid email address
                 </ng-container>
-            </ng-container>
+            </p>
+            <p 
+                *ngIf="form.get('email')?.['pending']"
+            >Cheking email...
+            </p>
+            <p 
+                *ngIf="form.get('email')?.['errors']?.['uniqEmail']"
+            >This email address already exists
+            </p>
         </div>
 
         <div class="form-item">
             <label for="password">Password</label>
             <input 
-                id="password" 
-                placeholder="Your password..."
-                name="password" 
-                type="password"
-                #password="ngModel" 
-                ngModel 
-                required
-                minlength="7"
+                formControlName="password" 
+                placeholder="Your password..." 
+                type="password" 
             >
-            <ng-container *ngIf="password.invalid && password.touched">
-                <ng-container *ngIf="password.errors?.['required']">
-                    <p>Password is required</p>
+            <p 
+                *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+            >
+                <ng-container 
+                    *ngIf="form.get('password')?.errors?.['required']"
+                >Password is required
                 </ng-container>
-                <ng-container *ngIf="password.errors?.['minlength']">
-                    <p>
-                        Password must be at least {{password.errors?.['minlength']['requiredLength']}} characters long
-                        You entered {{password.errors?.['minlength']['actualLength']}} characters
-                    </p>
+                <ng-container 
+                    *ngIf="form.get('password')?.errors?.['minlength']"
+                >Password must be at least {{ form.get('password')?.errors?.['minlength']?.requiredLength }} characters long. 
+                You entered {{ form.get('password')?.errors?.['minlength']?.actualLength }} characters
                 </ng-container>
-            </ng-container>
+            </p>
         </div>
+
         <button type="submit">Submit</button>
     </form>
-</div> 
-
+  </div>
+  
